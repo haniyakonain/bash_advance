@@ -1,244 +1,190 @@
-# bash_advance
-<h3>shell / cli (command line interface)</h3>
-shell -> prompt -> instruction to os<br>
+# 🐚 Bash Advanced Guide
 
-ls options(for details, timestamp, etc)<br>
-
-<h2>ls -l </h2>
-for details<br>
-it has permission,number of reference,owner,group owner,<br>
-size in bytes,last modifies date and timestamp and name of directory<br>
-syntax- ls -l fiename<br>
-
-<h2>ls -R </h2>
-details of sub directory<br>
-syntax- ls -R subdirectory name <br>
-
-<h2>ls -t</h2>
-for timestamp<br>
-(can combine commands like ls-lt)<br>
-syntax- ls -t fiename<br>
-
-<h2>ls -la </h2>
-for seeing hidden file name<br>
-syntax- ls -la filename<br>
-
-<h2>ls -lr </h2>
-reverse format of what it was modified<br>
-syntax- ls -lr filename<br>
-
- <h2>ls -s  </h2>
-for size<br>
-syntax- ls -s <br>
+This guide is a comprehensive reference to using advanced Bash commands and tools like `grep`, `sed`, and `awk`, along with basic and advanced shell operations.
 
- <h2>ls -lR | grep . </h2>
-recursively grep or give<br>
-syntax-ls -lR | grep .filename<br>
+---
 
- <h2>ls *. </h2>
-wildcard<br>
-syntax- ls *.filename<br>
+## 🔧 Shell / CLI Basics
 
- <h2>ls .. </h2>
-all folders/files<br>
-syntax- ls ..<br>
+- A **shell** is a command-line interface (CLI) that interprets user commands to the operating system.
+- Example command: `ls` (list directory contents)
 
- <h2>cat (concatenate) </h2>
-> is forward operator<br>
-
- <h2>cat >  </h2>
-for adding data<br>
-syntax- cat > filename<br>
-ctrl d after completing <br>
+---
 
- <h2>cat >>  </h2>
-append data at end of file<br>
-syntax- cat >> filename<br>
+## 📁 `ls` Command Variants
 
- <h2>&& </h2>
-combine command<br>
-syntax- command1 && command2 && command3<br>
+| Command       | Description |
+|---------------|-------------|
+| `ls -l`       | Long format listing (permissions, size, timestamp, etc.) |
+| `ls -R`       | Recursively lists subdirectories |
+| `ls -t`       | Sorts by timestamp |
+| `ls -lt`      | Combines long listing and timestamp sort |
+| `ls -la`      | Lists all files, including hidden ones |
+| `ls -lr`      | Reverse order |
+| `ls -s`       | Displays file sizes |
+| `ls -lR \| grep .` | Grep through recursive listing |
+| `ls *.`       | Wildcard usage |
+| `ls ..`       | Contents of parent directory |
 
- <h2>mkdir -p  </h2>
-for creating 2 directories recursively<br>
-syntax- mkdir -p directory name/new directory<br>
+---
 
- <h2>mv(move) </h2>
-to rename file<br>
-syntax- mv old_filename new_filename<br>
+## 📄 File Operations
 
-to move file<br>
-syntax- mv filename where to move
+### `cat` - Concatenate
 
-can move and rename it <br>
-syntax- mv filename/path(where to move)/rename filename<br>
+| Command         | Function |
+|-----------------|----------|
+| `cat > file`    | Create or overwrite a file |
+| `cat >> file`   | Append data to a file |
 
- <h2>cp(copy)  </h2>
-copy file<br>
-syntax- cp path<br>
+### Combine Commands
 
-cp directory recursively<br>
-syntax- cp -r path <br>
-
- <h2>delete </h2>
-syntax-rm filename<br>
+```bash
+command1 && command2 && command3
+````
 
-syntax- rm -r foldername<br>
-to wipeout folder<br>
-
-<h2>chmod</h2>
-change file permission <br>
-first column- permission <br>
-modify the read write execute in a file<br>
+---
 
-<h2>ugo and + - and r w x</h2>
-u - user<br>
-g - growth<br>
-o - other<br>
-+ - setting/add<br>
-- - revoke/remove<br><br>
+## 📂 Directory & File Management
 
-for file <br>
-example- chmod ugo-r<br>
+| Command               | Description                |
+| --------------------- | -------------------------- |
+| `mkdir -p dir/newdir` | Create nested directories  |
+| `mv old new`          | Rename file                |
+| `mv file /dest`       | Move file                  |
+| `cp file /dest`       | Copy file                  |
+| `cp -r dir /dest`     | Copy directory recursively |
+| `rm file`             | Delete file                |
+| `rm -r folder`        | Delete folder              |
 
-for folder<br>
-example- chmod -R ugo-r<br>
+---
 
-<h2>using numbers</h2>
-4 - read<br>
-2 - write<br>
-1 - execute<br>
-6 - read,write <br>
-syntax- chmod 664 filename<br>
+## 🔐 File Permissions
 
-<h2>echo</h2>
-display message<br>
-echo 'message'<br>
-can also look at environment variable <br>
+| Symbol | Meaning     |
+| ------ | ----------- |
+| u      | user        |
+| g      | group       |
+| o      | other       |
+| r      | read (4)    |
+| w      | write (2)   |
+| x      | execute (1) |
 
-<h2>head</h2>
-look at top of file<br>
-syntax- head filename<br>
+### Symbolic
 
-<h2>tail</h2>
-look at end of file<br>
-syntax- tail filename<br>
+```bash
+chmod ugo-r file
+chmod -R ugo-r folder
+```
 
-<h2>for specific rows</h2>
-head -20 filename<br>
+### Numeric
 
-<h2>view particular section </h2>
-tail -n start filename | head<br><br><br>
+```bash
+chmod 664 filename
+```
 
+---
 
-<h2>| </h2>
-its pipe operator <br>
-syntax- command 1 | command 2<br>
-output of command 1 goes to command 2<br>
+## 💬 Output & Viewing
 
-<h2>wc</h2>
-word count<br>
-syntax- wc filename<br>
-it gives lines words characters<br>
+| Command                             | Function                   |
+| ----------------------------------- | -------------------------- |
+| `echo 'text'`                       | Prints message or variable |
+| `head filename`                     | View top lines             |
+| `tail filename`                     | View bottom lines          |
+| `head -20 filename`                 | First 20 lines             |
+| `tail -n 30 filename \| head -n 10` | View specific section      |
 
-<h2>grep</h2>
-occurrences of certain word<br>
-grep 'word' filename<br>
-can be used with pipe commands<br>
+---
 
-<h2>grep -c</h2>
-Counts the number of lines<br> containing 'word' in the<br> specified file<br>
-syntax- grep -c 'word' filename<br>
+## 🔀 Pipes & Word Count
 
-<h2>grep -h</h2>
-Searches for 'word' in the file and displays matching lines without the filename prefix<br>
-syntax- grep -h 'word' filename<br>
+| Command                | Function                        |
+| ---------------------- | ------------------------------- |
+| `command1 \| command2` | Pipe output of one into another |
+| `wc filename`          | Line, word, char count          |
 
-<h2>grep -hi</h2>
-Searches for 'word' case-insensitively and displays matching lines without the filename prefix<br>
-syntax- grep -hi 'word' filename<br>
+---
 
-<h2>grep -hir </h2> Searches recursively for 'word' case-insensitively in all files/directories and displays matches without filenames<br>
-syntax-grep -hir 'word' filename<br>
+## 🔍 `grep` (Global Regular Expression Print)
 
-<h2>grep -w</h2> Searches for 'word' as a whole word (not part of other words) in the specified file<br>
-syntax- grep -w 'word' filename<br>
+| Command                | Function                |
+| ---------------------- | ----------------------- |
+| `grep 'word' file`     | Search for a word       |
+| `grep -c 'word' file`  | Count matches           |
+| `grep -h 'word' file`  | Hide filename in output |
+| `grep -hi 'word' file` | Case-insensitive search |
+| `grep -hir 'word'`     | Recursive search        |
+| `grep -w 'word' file`  | Match whole words only  |
+| `grep -o 'word' file`  | Only show matched word  |
 
-<h2>grep -o</h2>
-Displays only the matched parts of lines containing 'word', not the entire lines<br>
-syntax-grep -o 'word' filename<br>
+---
 
-<h2>history 0</h2>
-previously executed commands<br>
+## ⌛ History & Scripts
 
-<h2>#!/bin/bash</h2>
-on the first line of our script 
-we must specify which interpreter we would like to parse our script 
-for bash we must put shebang in first line of script <br>
+* `history 0` – Show previous commands
+* `#!/bin/bash` – Shebang to define the interpreter at the start of a script
 
-<h2>node js installation </h2>
-open source server environment 
-it uses js as a server
-asynchronous programming <br>
+---
 
-<h2>for ios</h2>
-homebrew <br>
-brew install node<br>
-node -v<br>
+## 🌐 Node.js Installation
 
-<h2>for unix</h2>
-nvm install node<br>
+### For macOS (using Homebrew)
 
-</h2>for windows </h2>
-download and run<br>
+```bash
+brew install node
+node -v
+```
 
-<h2>advanced commands (grep, sed, awk)</h2>
-they have extra advantage and functionality <br>
+### For Unix (using nvm)
 
-<h2>grep</h2><br>
-1. grep -P<br> Uses Perl-compatible regular expressions, allowing for more complex pattern matching<br>
+```bash
+nvm install node
+```
 
-2. grep -v<br>
-Inverts the match, showing lines that don't contain the pattern<br>
+### For Windows
 
-3. grep -A <br> Shows n lines after each match, providing context<br>
+Download from [https://nodejs.org](https://nodejs.org) and install.
 
-4. grep -B <br> 
-Shows n lines before each match, providing context<br>
+---
 
-5. grep -C <br>
-Shows n lines before and after each match, providing full context<br>
+## 🔍 Advanced Command Tools
 
-<h2>sed</h2><br>
-1. sed 's/pattern/replacement/g'<br> 
-Globally replaces all occurrences of a pattern in each line<br>
+### `grep` Advanced
 
-2. sed -n '5,10p'
-<br> Prints only lines 5 through 10 of the input<br>
+| Flag   | Description                   |
+| ------ | ----------------------------- |
+| `-P`   | Perl-style regex              |
+| `-v`   | Invert match                  |
+| `-A n` | Show n lines **after** match  |
+| `-B n` | Show n lines **before** match |
+| `-C n` | Show n lines **around** match |
 
-3. sed '/pattern/d'
-<br> Deletes lines matching the specified pattern<br>
+---
 
-4. sed 'G'<br> Inserts a blank line after every line of input<br>
+### `sed` (Stream Editor)
 
-5. sed '1i\header'<br>
-Inserts "header" at the beginning of the file<br>
+| Command                         | Description                    |
+| ------------------------------- | ------------------------------ |
+| `sed 's/pattern/replacement/g'` | Global replace                 |
+| `sed -n '5,10p'`                | Show lines 5–10                |
+| `sed '/pattern/d'`              | Delete matching lines          |
+| `sed 'G'`                       | Add blank line after each line |
+| `sed '1i\header'`               | Insert at start                |
 
-<h2>awk</h2><br>
-1. awk '{print $1, $NF}'<br> Prints the first and last field of each line<br>
+---
 
-2. awk -F<br> '{print $1}'<br> Uses ':' as a field separator and prints the first field<br>
+### `awk` (Pattern Scanning & Processing)
 
-3. awk '{sum += $1} END {print sum}'<br> 
-Sums up the values in the first column and prints the total<br>
+| Command                             | Description                  |
+| ----------------------------------- | ---------------------------- |
+| `awk '{print $1, $NF}'`             | Print first and last columns |
+| `awk -F ':' '{print $1}'`           | Use colon as field separator |
+| `awk '{sum += $1} END {print sum}'` | Sum first column             |
+| `awk 'NR % 2 == 0'`                 | Print even-numbered lines    |
+| `awk 'length > 80'`                 | Print long lines             |
 
-4. awk 'NR % 2 == 0'<br> 
-Prints only even-numbered lines<br>
 
-5. awk 'length > 80'<br>
-Prints lines longer than 80 characters<br>
-
-These commands offer powerful text processing capabilities, allowing for complex pattern matching, text manipulation, and data analysis in Unix-like systems
 
 
 
